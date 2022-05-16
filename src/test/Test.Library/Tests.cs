@@ -144,15 +144,14 @@ namespace Test.Library
             Tablas de datos:
                 SpellsBook
                                 AttackValue    DefenseValue
-                    SpellType1      70              70
-                    SpellType2      50              50
-                    SpellBook       120             120
+                    SpellOne x2     70 x2           70 x2
+                    SpellBook       140             140
 
                 Wizard
                     AttackValue_Inicial     100
                     DefenseValue_Inicial    100
-                    AttackValue_Final       220
-                    DefenseValue_Final      220
+                    AttackValue_Final       240
+                    DefenseValue_Final      240
                     
             De paso también probamos RemoveMagicItem
         */
@@ -165,8 +164,8 @@ namespace Test.Library
 
             wizardTest.AddItem(book);
 
-            Assert.AreEqual(140, wizardTest.DefenseValue);
-            Assert.AreEqual(140, wizardTest.AttackValue);
+            Assert.AreEqual(240, wizardTest.DefenseValue);
+            Assert.AreEqual(240, wizardTest.AttackValue);
 
             wizardTest.RemoveItem(book);
             Assert.AreEqual(100, wizardTest.DefenseValue);

@@ -1,6 +1,6 @@
 namespace RoleplayGame
 {
-    public class Shield: IDefenseItem
+    public class Shield : IDefenseItem
     {
         public int DefenseValue
         {
