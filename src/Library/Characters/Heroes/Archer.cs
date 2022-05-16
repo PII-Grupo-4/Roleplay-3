@@ -1,6 +1,6 @@
 namespace RoleplayGame
 {
-    public class Archer: Heroe
+    public class Archer: Hero
     {
         public Archer(string name) : base(name)
         {

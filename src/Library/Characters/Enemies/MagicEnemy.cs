@@ -1,6 +1,6 @@
 namespace RoleplayGame
 {
-    public abstract class MagicEnemy : MagicCharacter
+    public abstract class MagicEnemy : MagicCharacter, IEnemy
     {
         public MagicEnemy(string name) : base(name)
         {

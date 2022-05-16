@@ -1,8 +1,8 @@
 namespace RoleplayGame
 {
-    public abstract class Heroe : Character
+    public abstract class Hero : Character, IHero
     {
-        public Heroe(string name) : base(name)
+        public Hero(string name) : base(name)
         {
             this.Name = name;
             this.vp = 0;
