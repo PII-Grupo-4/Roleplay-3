@@ -6,13 +6,5 @@ namespace RoleplayGame
         {
             this.Name = name;
         }
-
-        public int VP
-        {
-            get
-            {
-                return this.vp;
-            }
-        }
     }
 }

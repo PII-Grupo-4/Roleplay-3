@@ -16,6 +16,14 @@ namespace RoleplayGame
 
 
         public string Name { get; set; }
+
+        public int VP
+        {
+            get
+            {
+                return this.vp;
+            }
+        }
         
         public virtual int AttackValue
         {
