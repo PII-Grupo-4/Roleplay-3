@@ -4,6 +4,7 @@ namespace RoleplayGame
 {
     public abstract class Character
     {
+        protected int vp;
         protected int health = 100;
 
         protected List<IItem> items = new List<IItem>();
