@@ -4,7 +4,7 @@ using RoleplayGame;
 namespace Test.Library
 {
     [TestFixture]
-    public class ICharacterTests
+    public class CharacterAndItemsTests
     {
         private Dwarf dwarfTest;
         private Knight knightTest;
