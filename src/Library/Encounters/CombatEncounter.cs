@@ -11,6 +11,8 @@ namespace RoleplayGame
             this.enemies.Add(enemy);
         }
 
+        public bool HeroesWin{ get; private set;}
+
         public override void DoEncounter()
         {
             List<IEnemy> enemiesInCombat = new List<IEnemy>(this.enemies);
@@ -107,10 +109,12 @@ namespace RoleplayGame
 
             if (enemiesInCombat.Count != 0)
             {
+                HeroesWin = true;
                 Console.WriteLine("The Heroes Win");
             }
             else
             {
+                HeroesWin = false;
                 Console.WriteLine("The Enemies Win");
             }
         }

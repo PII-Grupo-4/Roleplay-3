@@ -54,11 +54,28 @@ namespace Test.Library
             vikingTest.AddItem(new Armor());
         }
 
+
         [Test]
-        public void CreateCombatEncounter()
+        public void CombatEncounter1vs1()
         {
             CombatEncounter CombatTest = new CombatEncounter(dwarfTest, orcTest);
             CombatTest.DoEncounter();
+
+            Assert.AreEqual(true, CombatTest.HeroesWin);
+        }
+
+        [Test]
+        public void CombatEncounter3vs3()
+        {
+            CombatEncounter CombatTest = new CombatEncounter(dwarfTest, orcTest);
+            //CombatTest.AddCharacter(knightTest);
+            //CombatTest.AddCharacter(wizardTest);
+            //CombatTest.AddCharacter(demonTest);
+            //CombatTest.AddCharacter(orcTest);
+
+            CombatTest.DoEncounter();
+
+            Assert.AreEqual(true, CombatTest.HeroesWin);
         }
     }
 }

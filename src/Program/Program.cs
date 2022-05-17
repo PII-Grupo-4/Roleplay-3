@@ -61,6 +61,11 @@ namespace Program
             vikingTest.AddItem(new Armor());
 
             CombatEncounter CombatTest = new CombatEncounter(dwarfTest, orcTest);
+            //CombatTest.AddCharacter(knightTest);
+            //CombatTest.AddCharacter(wizardTest);
+            //CombatTest.AddCharacter(demonTest);
+            //CombatTest.AddCharacter(orcTest);
+
             CombatTest.DoEncounter();
         }
     }
