@@ -4,7 +4,6 @@ namespace RoleplayGame
     {
         public Hero(string name) : base(name)
         {
-            this.Name = name;
             this.vp = 0;
         }
 

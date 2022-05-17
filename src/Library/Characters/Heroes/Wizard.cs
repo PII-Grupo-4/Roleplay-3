@@ -4,7 +4,7 @@ namespace RoleplayGame
     {
         public Wizard(string name): base(name)
         {
-            this.Name = name;
+
         }
     }
 }

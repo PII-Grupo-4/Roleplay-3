@@ -4,7 +4,7 @@ namespace RoleplayGame
     {
         public MagicEnemy(string name) : base(name)
         {
-            this.Name = name;
+            
         }
     }
 }

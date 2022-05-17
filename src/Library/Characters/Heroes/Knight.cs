@@ -4,7 +4,7 @@ namespace RoleplayGame
     {
         public Knight(string name) : base(name)
         {
-            this.Name = name;
+
         }
     }
 }

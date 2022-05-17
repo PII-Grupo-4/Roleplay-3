@@ -8,7 +8,7 @@ namespace RoleplayGame
         
         public MagicCharacter(string name) : base(name)
         {
-            this.Name = name;
+            
         }
 
         public void AddItem(IMagicalItem item)

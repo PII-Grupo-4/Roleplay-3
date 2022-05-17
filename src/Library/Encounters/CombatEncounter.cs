@@ -7,8 +7,7 @@ namespace RoleplayGame
     {        
         public CombatEncounter (IHero heroe, IEnemy enemy) : base(heroe, enemy)
         {
-            this.heroes.Add(heroe);
-            this.enemies.Add(enemy);
+            
         }
 
         public bool HeroesWin{ get; private set;}
