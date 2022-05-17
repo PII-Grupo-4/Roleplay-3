@@ -15,12 +15,18 @@ namespace RoleplayGame
 
         public void AddCharacter (IHero hero)
         {
-            this.heroes.Add(hero);
+            if (!this.heroes.Contains(hero))
+            {
+                this.heroes.Add(hero);
+            }
         }
 
         public void AddCharacter (IEnemy enemy)
         {
-            this.enemies.Add(enemy);
+            if(!this.enemies.Contains(enemy))
+            {
+                this.enemies.Add(enemy);
+            }
         }
 
         public void RemoveCharacter (IHero hero)
