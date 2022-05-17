@@ -106,7 +106,7 @@ namespace RoleplayGame
             }
 
 
-            if (enemiesInCombat.Count != 0)
+            if (enemiesInCombat.Count == 0)
             {
                 HeroesWin = true;
                 Console.WriteLine("The Heroes Win");
