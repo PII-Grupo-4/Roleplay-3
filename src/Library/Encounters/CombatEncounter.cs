@@ -12,10 +12,7 @@ namespace RoleplayGame
 
         public override void DoEncounter()
         {
-            bool enemiesAlive = true;
-            bool heroesAlive = true;
-
-            while (enemiesAlive == true && heroesAlive == true)
+            while (this.enemies.Count != 0 && this.heroes.Count != 0)
             {
                 // Enemies atacan heroes
                     // Un solo hero
@@ -62,49 +59,37 @@ namespace RoleplayGame
                                 enemy.ReceiveAttack(hero.AttackValue);
                                 if (enemy.Health == 0)
                                 {
-                                    // El siguiente bloque se utiliza para analizar si hero es magic o no
-                                    var magicOrNot = hero as MagicHero;
-                                    if (magicOrNot != null)
-                                    {
-                                        magicOrNot.IncreaseVP(enemy.VP);
-                                    }
-                                    else
-                                    {
-                                        (hero as Hero).IncreaseVP(enemy.VP);
-                                    }
+                                    (hero as IHero).IncreaseVP(enemy.VP);
                                 }
                             }
                         }
                     }
                 }
 
-                // Se verifica si aún quedan heroes vivos
-                heroesAlive = false; // Tomo por suposición que los heroes están muertos
-                foreach(Character hero in this.heroes)
+                //Los heroes y enemies muertos se quitan del combate
+                foreach (Character hero in this.heroes)
                 {
-                    if (hero.Health > 0)
+                    if (hero.Health == 0)
                     {
-                        heroesAlive = true; // Si alguno está vivo, la suposición es falsa
-                        break;
-                    }
-                }
-                
-                // Se verifica si aún quedan enemies vivos (en caso que los heroes estén vivos)
-                if (heroesAlive == true)
-                {
-                    enemiesAlive = false;
-                    foreach(Character enemy in this.enemies)
-                    {
-                        if (enemy.Health > 0)
+                        if (hero.VP >= 5)
                         {
-                            enemiesAlive = true;
-                            break;
+                            hero.Cure();
                         }
+                        RemoveCharacter(hero as IHero);
                     }
                 }
+
+                foreach (Character enemy in this.enemies)
+                {
+                    if (enemy.Health == 0)
+                    {
+                        RemoveCharacter(enemy as IEnemy);
+                    }
+                }
+
             }
 
-            // Se verifican los heroes que consiguieron 5VP o más y se los cura
+            // En caso de que queden heroes vivos, si tienen >= 5VP se los cura 
             foreach (Character hero in this.heroes)
             {
                 if (hero.VP >= 5)
