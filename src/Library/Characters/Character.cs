@@ -15,7 +15,7 @@ namespace RoleplayGame
         }
 
 
-        public string Name { get; set; }
+        protected string Name { get; set; }
 
         public int VP
         {
