@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 
 namespace RoleplayGame
 {
@@ -12,17 +13,20 @@ namespace RoleplayGame
 
         public override void DoEncounter()
         {
-            while (this.enemies.Count != 0 && this.heroes.Count != 0)
+            List<IEnemy> enemiesInCombat = new List<IEnemy>(this.enemies);
+            List<IHero> heroesInCombat = new List<IHero>(this.heroes);
+
+            while (enemiesInCombat.Count != 0 && heroesInCombat.Count != 0)
             {
                 // Enemies atacan heroes
                     // Un solo hero
-                if (this.heroes.Count == 1)
+                if (heroesInCombat.Count == 1)
                 {
-                    foreach (Character enemy in this.enemies)
+                    foreach (Character enemy in enemiesInCombat)
                     {
-                        if ((this.heroes[0] as Character).Health > 0)
+                        if ((heroesInCombat[0] as Character).Health > 0)
                         {
-                            (this.heroes[0] as Character).ReceiveAttack(enemy.AttackValue);
+                            (heroesInCombat[0] as Character).ReceiveAttack(enemy.AttackValue);
                         }
                         else
                         {
@@ -33,26 +37,26 @@ namespace RoleplayGame
                     // Más de un hero
                 else
                 {
-                    int difference = this.enemies.Count - this.heroes.Count; // Se utiliza en caso que hayan mas enemies que heroes
+                    int difference = enemiesInCombat.Count - heroesInCombat.Count; // Se utiliza en caso que hayan mas enemies que heroes
                     difference = difference < 0 ? 0 : difference;
 
-                    int counter = this.enemies.Count - difference;
+                    int counter = enemiesInCombat.Count - difference;
 
                     for (int i = 0; i < counter; i++)
                     {
-                        if ((this.heroes[i] as Character).Health > 0)
+                        if ((heroesInCombat[i] as Character).Health > 0)
                         {
-                            (this.heroes[i] as Character).ReceiveAttack((this.enemies[i + difference] as Character).AttackValue);
+                            (heroesInCombat[i] as Character).ReceiveAttack((enemiesInCombat[i + difference] as Character).AttackValue);
                         }
                     }
                 }
 
                 // Heroes atacan enemies
-                foreach (Character hero in this.heroes)
+                foreach (Character hero in heroesInCombat)
                 {
                     if (hero.Health > 0)
                     {
-                        foreach(Character enemy in this.enemies)
+                        foreach(Character enemy in enemiesInCombat)
                         {
                             if (enemy.Health > 0)
                             {
@@ -71,11 +75,10 @@ namespace RoleplayGame
                 {
                     if (hero.Health == 0)
                     {
-                        if (hero.VP >= 5)
+                        if (heroesInCombat.Contains(hero as IHero))
                         {
-                            hero.Cure();
+                            heroesInCombat.Remove(hero as IHero);
                         }
-                        RemoveCharacter(hero as IHero);
                     }
                 }
 
@@ -83,19 +86,32 @@ namespace RoleplayGame
                 {
                     if (enemy.Health == 0)
                     {
-                        RemoveCharacter(enemy as IEnemy);
+                        if (enemiesInCombat.Contains(enemy as IEnemy))
+                        {
+                            enemiesInCombat.Remove(enemy as IEnemy);
+                        }
                     }
                 }
 
             }
 
-            // En caso de que queden heroes vivos, si tienen >= 5VP se los cura 
+            // Si un héroe ha conseguido 5+ (5 o más) VP, se cura.
             foreach (Character hero in this.heroes)
             {
                 if (hero.VP >= 5)
                 {
                     hero.Cure();
                 }
+            }
+
+
+            if (enemiesInCombat.Count != 0)
+            {
+                Console.WriteLine("The Heroes Win");
+            }
+            else
+            {
+                Console.WriteLine("The Enemies Win");
             }
         }
     }

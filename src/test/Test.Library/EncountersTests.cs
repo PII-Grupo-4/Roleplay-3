@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using RoleplayGame;
+using System;
 
 namespace Test.Library
 {
@@ -51,6 +52,13 @@ namespace Test.Library
             vampireTest.AddItem(new Helmet());
             vikingTest.AddItem(new Sword());
             vikingTest.AddItem(new Armor());
+        }
+
+        [Test]
+        public void CreateCombatEncounter()
+        {
+            CombatEncounter CombatTest = new CombatEncounter(dwarfTest, orcTest);
+            CombatTest.DoEncounter();
         }
     }
 }
