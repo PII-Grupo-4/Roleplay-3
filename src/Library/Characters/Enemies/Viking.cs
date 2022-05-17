@@ -5,7 +5,7 @@ namespace RoleplayGame
         public Viking(string name) : base(name)
         {
             this.Name = name;
-            this.vp = 25;
+            this.vp = 2;
         }  
     }
 }

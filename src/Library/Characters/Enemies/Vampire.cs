@@ -5,7 +5,7 @@ namespace RoleplayGame
         public Vampire(string name) : base(name)
         {
             this.Name = name;
-            this.vp = 30;
+            this.vp = 3;
         }
     }
 }

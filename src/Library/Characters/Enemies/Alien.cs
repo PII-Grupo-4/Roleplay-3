@@ -6,7 +6,7 @@ namespace RoleplayGame
         public Alien(string name) : base(name)
         {
             this.Name = name;
-            this.vp = 20;
+            this.vp = 2;
         }
         
     }

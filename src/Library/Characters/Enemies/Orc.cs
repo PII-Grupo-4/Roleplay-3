@@ -6,7 +6,7 @@ namespace RoleplayGame
         public Orc(string name) : base(name)
         {
             this.Name = name;
-            this.vp = 40;
+            this.vp = 4;
         }
         
     }
