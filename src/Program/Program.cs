@@ -60,11 +60,16 @@ namespace Program
             vikingTest.AddItem(new Sword());
             vikingTest.AddItem(new Armor());
 
+            demonTest.AddItem(new Staff());
+            wizardTest.AddItem(new Staff());
+            
+
             CombatEncounter CombatTest = new CombatEncounter(dwarfTest, orcTest);
-            //CombatTest.AddCharacter(knightTest);
-            //CombatTest.AddCharacter(wizardTest);
-            //CombatTest.AddCharacter(demonTest);
-            //CombatTest.AddCharacter(orcTest);
+            CombatTest.AddCharacter(knightTest);
+            CombatTest.AddCharacter(archerTest);
+            CombatTest.AddCharacter(wizardTest);
+            CombatTest.AddCharacter(demonTest);
+            CombatTest.AddCharacter(alienTest);
 
             CombatTest.DoEncounter();
         }

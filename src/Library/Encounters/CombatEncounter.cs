@@ -10,15 +10,20 @@ namespace RoleplayGame
             
         }
 
+        // HeroesWin y Tie lños utilizo para realizar test y saber el resultado de la partida
         public bool HeroesWin{ get; private set;}
+        public bool Tie{ get; private set;}
 
         public override void DoEncounter()
         {
             List<IEnemy> enemiesInCombat = new List<IEnemy>(this.enemies);
             List<IHero> heroesInCombat = new List<IHero>(this.heroes);
+            // Después de 100 enfrentamientos, termina en empate
+            int roundCounter = 100;
 
-            while (enemiesInCombat.Count != 0 && heroesInCombat.Count != 0)
+            while (enemiesInCombat.Count != 0 && heroesInCombat.Count != 0 && roundCounter != 0)
             {
+                roundCounter --;
                 // Enemies atacan heroes
                     // Un solo hero
                 if (heroesInCombat.Count == 1)
@@ -111,10 +116,15 @@ namespace RoleplayGame
                 HeroesWin = true;
                 Console.WriteLine("The Heroes Win");
             }
-            else
+            else if (heroesInCombat.Count == 0)
             {
                 HeroesWin = false;
                 Console.WriteLine("The Enemies Win");
+            }
+            else
+            {
+                Tie = true;
+                Console.WriteLine("The heroes and the enemies tied.");
             }
         }
     }

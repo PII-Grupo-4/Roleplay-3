@@ -61,6 +61,32 @@ namespace Test.Library
             CombatEncounter CombatTest = new CombatEncounter(dwarfTest, orcTest);
             CombatTest.DoEncounter();
 
+            Assert.AreEqual(false, CombatTest.HeroesWin);
+        }
+
+        [Test]
+        public void CombatEncounter1vs3EnemiesWin()
+        {
+            
+            CombatEncounter CombatTest = new CombatEncounter(dwarfTest, orcTest);
+            CombatTest.AddCharacter(demonTest);
+            CombatTest.AddCharacter(alienTest);
+
+            CombatTest.DoEncounter();
+
+            Assert.AreEqual(false, CombatTest.HeroesWin);
+        }
+
+        [Test]
+        public void CombatEncounter1vs3HeroWin()
+        {
+            dwarfTest.AddItem(new Staff());
+            CombatEncounter CombatTest = new CombatEncounter(dwarfTest, orcTest);
+            CombatTest.AddCharacter(demonTest);
+            CombatTest.AddCharacter(alienTest);
+
+            CombatTest.DoEncounter();
+
             Assert.AreEqual(true, CombatTest.HeroesWin);
         }
 
@@ -68,14 +94,49 @@ namespace Test.Library
         public void CombatEncounter3vs3()
         {
             CombatEncounter CombatTest = new CombatEncounter(dwarfTest, orcTest);
-            //CombatTest.AddCharacter(knightTest);
-            //CombatTest.AddCharacter(wizardTest);
-            //CombatTest.AddCharacter(demonTest);
-            //CombatTest.AddCharacter(orcTest);
+            CombatTest.AddCharacter(knightTest);
+            CombatTest.AddCharacter(archerTest);
+            CombatTest.AddCharacter(demonTest);
+            CombatTest.AddCharacter(alienTest);
+
+            CombatTest.DoEncounter();
+
+            Assert.AreEqual(false, CombatTest.HeroesWin);
+        }
+
+        [Test]
+        public void CombatEncounter3vs2()
+        {
+            CombatEncounter CombatTest = new CombatEncounter(dwarfTest, orcTest);
+            CombatTest.AddCharacter(knightTest);
+            CombatTest.AddCharacter(archerTest);
 
             CombatTest.DoEncounter();
 
             Assert.AreEqual(true, CombatTest.HeroesWin);
         }
+
+        // El siguiente test se realiza para el caso en que el personaje más
+        // fuerte entre los enemies y entre los heroes tengan los mismo valores
+        // de defensa y ataque.
+        
+        [Test]
+        public void CombatEncounter1vs1EqualsValues()
+        {
+            demonTest.AddItem(new Staff());
+            wizardTest.AddItem(new Staff());
+            
+            Assert.AreEqual(200, wizardTest.DefenseValue);
+            Assert.AreEqual(200, wizardTest.DefenseValue);
+            Assert.AreEqual(200, demonTest.AttackValue);
+            Assert.AreEqual(200, demonTest.AttackValue);
+
+            
+            CombatEncounter CombatTest = new CombatEncounter(wizardTest, demonTest);
+
+            CombatTest.DoEncounter();
+            Assert.AreEqual(true, CombatTest.Tie);
+        }
+        
     }
 }
