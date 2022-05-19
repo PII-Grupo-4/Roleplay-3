@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace RoleplayGame
 {
-    public abstract class MagicHero : Hero
+    public abstract class MagicHero : Hero, IMagicCharacter
     {
         protected List<IMagicalItem> magicalItems = new List<IMagicalItem>();
 
