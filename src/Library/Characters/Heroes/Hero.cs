@@ -1,6 +1,6 @@
 namespace RoleplayGame
 {
-    public abstract class Hero : Character, IHero
+    public abstract class Hero : Character
     {
         public Hero(string name) : base(name)
         {
@@ -10,6 +10,11 @@ namespace RoleplayGame
         public void IncreaseVP(int VPValue)
         {
             this.vp += VPValue;
+        }
+
+        public void RestoreVP()
+        {
+            this.vp = 0;
         }
     }
 }

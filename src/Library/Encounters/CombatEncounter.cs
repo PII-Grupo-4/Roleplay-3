@@ -5,19 +5,25 @@ namespace RoleplayGame
 {
     public class CombatEncounter : Encounter
     {        
-        public CombatEncounter (IHero heroe, IEnemy enemy) : base(heroe, enemy)
+        public CombatEncounter (Hero heroe, Enemy enemy) : base(heroe, enemy)
         {
             
         }
 
-        // HeroesWin y Tie lños utilizo para realizar test y saber el resultado de la partida
+        // HeroesWin y Tie los utilizo para realizar test y saber el resultado de la partida
         public bool HeroesWin{ get; private set;}
         public bool Tie{ get; private set;}
 
+        // Un detalle, es que cuando realize tests, me di cuenta que si se inicia un encuentro con un heroe
+        // y un ememigo, y ambos tienen el mismo valor de AttackValue y Defense Value, se crea un bucle infifito
+        // ya que ninguno de los dos enemigos es atacado con RecieveAttack, porque para realizar un ataque
+        // es necesario que el AttackValue sea mayor que el DefenseVAlue.
+        // Para solucionarlo decidi agregar un contador de rounds, y si llegaron a los 100 rounds y no hubo ganador
+        // termina en empate
         public override void DoEncounter()
         {
-            List<IEnemy> enemiesInCombat = new List<IEnemy>(this.enemies);
-            List<IHero> heroesInCombat = new List<IHero>(this.heroes);
+            List<Enemy> enemiesInCombat = new List<Enemy>(this.enemies);
+            List<Hero> heroesInCombat = new List<Hero>(this.heroes);
             // Después de 100 enfrentamientos, termina en empate
             int roundCounter = 100;
 
@@ -69,7 +75,7 @@ namespace RoleplayGame
                                 enemy.ReceiveAttack(hero.AttackValue);
                                 if (enemy.Health == 0)
                                 {
-                                    (hero as IHero).IncreaseVP(enemy.VP);
+                                    (hero as Hero).IncreaseVP(enemy.VP);
                                 }
                             }
                         }
@@ -81,9 +87,9 @@ namespace RoleplayGame
                 {
                     if (hero.Health == 0)
                     {
-                        if (heroesInCombat.Contains(hero as IHero))
+                        if (heroesInCombat.Contains(hero as Hero))
                         {
-                            heroesInCombat.Remove(hero as IHero);
+                            heroesInCombat.Remove(hero as Hero);
                         }
                     }
                 }
@@ -92,9 +98,9 @@ namespace RoleplayGame
                 {
                     if (enemy.Health == 0)
                     {
-                        if (enemiesInCombat.Contains(enemy as IEnemy))
+                        if (enemiesInCombat.Contains(enemy as Enemy))
                         {
-                            enemiesInCombat.Remove(enemy as IEnemy);
+                            enemiesInCombat.Remove(enemy as Enemy);
                         }
                     }
                 }
@@ -107,6 +113,7 @@ namespace RoleplayGame
                 if (hero.VP >= 5)
                 {
                     hero.Cure();
+                    (hero as Hero).RestoreVP();
                 }
             }
 

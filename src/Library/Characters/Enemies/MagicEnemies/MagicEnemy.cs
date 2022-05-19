@@ -2,13 +2,13 @@ using System.Collections.Generic;
 
 namespace RoleplayGame
 {
-    public abstract class MagicCharacter: Character
+    public abstract class MagicEnemy : Enemy
     {
         protected List<IMagicalItem> magicalItems = new List<IMagicalItem>();
-        
-        public MagicCharacter(string name) : base(name)
+
+        public MagicEnemy(string name) : base(name)
         {
-            
+
         }
 
         public void AddItem(IMagicalItem item)
